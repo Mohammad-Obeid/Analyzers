@@ -6,6 +6,8 @@ Spring exposes three SOAP operations to the .NET analyzer service. It keeps **co
 
 When Spring is running, the endpoint is `http://localhost:8080/ws` and the WSDL is `http://localhost:8080/ws/machineReaderService.wsdl`. Requests use namespace `http://health.goverment/service/cbc`, `Content-Type: text/xml`, and the `X-CBC-Api-Key` header matching `CBC_API_KEY` in `service/.env`.
 
+When Spring is reached through an HTTPS reverse proxy such as Cloudflare Tunnel, forwarded headers are used to advertise the public HTTPS SOAP address in the WSDL.
+
 | Operation | Request | Response |
 | --- | --- | --- |
 | `getSampleData` | `machineId`, `sampleId` | Ordered CBC category definitions: `categoryId`, `testCode`, `resultOrder`, optional `startPosition` and `categoryLength`, and `factor`. The `sampleId` is retained in the contract; ordering comes from machine/category configuration, not a stored sample. |
