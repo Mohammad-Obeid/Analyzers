@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://health.goverment/service/cbc"
+           xmlns:tns="http://health.goverment/service/cbc"
+           elementFormDefault="qualified">
+    <xs:element name="getSampleDataRequest">
+        <xs:complexType><xs:sequence>
+            <xs:element name="machineId" type="xs:long"/>
+            <xs:element name="sampleId" type="xs:long"/>
+        </xs:sequence></xs:complexType>
+    </xs:element>
+    <xs:element name="getSampleDataResponse">
+        <xs:complexType><xs:sequence>
+            <xs:element name="status" type="xs:string"/>
+            <xs:element name="message" type="xs:string"/>
+            <xs:element name="results" minOccurs="0"><xs:complexType><xs:sequence>
+                <xs:element name="result" minOccurs="0" maxOccurs="unbounded"><xs:complexType><xs:sequence>
+                    <xs:element name="categoryId" type="xs:long"/>
+                    <xs:element name="testCode" type="xs:string"/>
+                    <xs:element name="resultOrder" type="xs:int"/>
+                    <xs:element name="startPosition" type="xs:int" minOccurs="0"/>
+                    <xs:element name="categoryLength" type="xs:int" minOccurs="0"/>
+                    <xs:element name="factor" type="xs:decimal"/>
+                </xs:sequence></xs:complexType></xs:element>
+            </xs:sequence></xs:complexType></xs:element>
+        </xs:sequence></xs:complexType>
+    </xs:element>
+    <xs:element name="barCodeDataRequest">
+        <xs:complexType><xs:sequence>
+            <xs:element name="machineId" type="xs:long"/>
+            <xs:element name="sampleId" type="xs:long"/>
+        </xs:sequence></xs:complexType>
+    </xs:element>
+    <xs:element name="barCodeDataResponse">
+        <xs:complexType><xs:sequence>
+            <xs:element name="status" type="xs:string"/>
+            <xs:element name="message" type="xs:string"/>
+            <xs:element name="barcodes" minOccurs="0"><xs:complexType><xs:sequence>
+                <xs:element name="barcode" minOccurs="0" maxOccurs="unbounded"><xs:complexType><xs:sequence>
+                    <xs:element name="machineId" type="xs:long"/>
+                    <xs:element name="value" type="xs:string"/>
+                </xs:sequence></xs:complexType></xs:element>
+            </xs:sequence></xs:complexType></xs:element>
+        </xs:sequence></xs:complexType>
+    </xs:element>
+    <xs:element name="submitCBCResultsRequest">
+        <xs:complexType><xs:sequence>
+            <xs:element name="requestId" type="xs:string"/>
+            <xs:element name="machineId" type="xs:long"/>
+            <xs:element name="sampleBarcode" type="xs:string"/>
+            <xs:element name="branchId" type="xs:long"/>
+            <xs:element name="patientCode" type="xs:string"/>
+            <xs:element name="patientName" type="xs:string"/>
+            <xs:element name="patientGender" type="xs:string"/>
+            <xs:element name="patientAge" type="xs:int"/>
+            <xs:element name="measuredAt" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="results"><xs:complexType><xs:sequence>
+                <xs:element name="result" maxOccurs="unbounded"><xs:complexType><xs:sequence>
+                    <xs:element name="testCode" type="xs:string"/>
+                    <xs:element name="testValue" type="xs:string"/>
+                    <xs:element name="testUnit" type="xs:string" minOccurs="0"/>
+                </xs:sequence></xs:complexType></xs:element>
+            </xs:sequence></xs:complexType></xs:element>
+        </xs:sequence></xs:complexType>
+    </xs:element>
+    <xs:element name="submitCBCResultsResponse">
+        <xs:complexType><xs:sequence>
+            <xs:element name="requestId" type="xs:string"/>
+            <xs:element name="status" type="xs:string"/>
+            <xs:element name="acceptedCount" type="xs:int"/>
+            <xs:element name="rejectedCount" type="xs:int"/>
+            <xs:element name="eventUid" type="xs:string" minOccurs="0"/>
+            <xs:element name="message" type="xs:string"/>
+        </xs:sequence></xs:complexType>
+    </xs:element>
+</xs:schema>
